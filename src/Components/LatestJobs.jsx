@@ -1,6 +1,7 @@
 import React from 'react'
 import JobCard from './JobCard'
-
+import { FaArrowCircleRight } from "react-icons/fa";
+import { Link } from 'react-router-dom';
 const LatestJobs = () => {
  const jobs=[
 {
@@ -71,7 +72,15 @@ const LatestJobs = () => {
                 )
             })
         }
-        <div className='min-w-[100px]'>More jobs</div>
+        <div className='min-w-[100px] flex flex-col items-center justify-center'>
+          <h1 className='text-[20px]'>More jobs</h1>
+          <Link to="/jobs">
+           <FaArrowCircleRight className='text-3xl'/>
+          </Link>
+        
+
+        </div>
+
         
     </div>
     </div>
