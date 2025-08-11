@@ -13,10 +13,22 @@
 
  
     app.use(cookieParser());
-        app.use(cors({
-        origin: 'http://localhost:5173', // your frontend URL
-        credentials: true               // allow cookies
-        }));
+        const allowedOrigins = [
+  'http://localhost:5173',
+  'https://education-friend-gvx2.vercel.app'  // your deployed frontend URL
+];
+
+app.use(cors({
+  origin: function(origin, callback) {
+    if (!origin) return callback(null, true); // allow non-browser requests like Postman
+    if (allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true
+}));
     const connectDB=async ()=>{
         try{
             await mongoose.connect(process.env.MONGO_URI)
