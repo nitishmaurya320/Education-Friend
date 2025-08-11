@@ -44,8 +44,9 @@ router.post("/verify-email",async(req,res)=>{
     user.isVerified=true;
     user.otp=null
     await user.save()
-    await WelcomeEmail(user.email)
     res.status(200).json({message:"Email Verified Successfuly"})
+    await WelcomeEmail(user.email)
+    
     } catch (error) {
         console.log(error)
         res.status(200).json({message:error})
