@@ -1,11 +1,13 @@
 import { createContext, useContext, useState, useEffect } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 axios.defaults.withCredentials = true;
 
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
+ 
   const [user, setUser] = useState(null); // store user data, not token
   const [loading, setLoading] = useState(true);
 
@@ -45,6 +47,8 @@ console.log(loading)
   const logout = async () => {
     await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/users/logout`);
     setUser(null);
+    window.location.href = '/';
+    
   };
 
   return (

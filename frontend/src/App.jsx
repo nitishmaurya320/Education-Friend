@@ -12,6 +12,7 @@ import Jobs from './Pages/Jobs'
 import EducationalContent from './Pages/EducationalContent'
 import VerifyEmail from './Pages/VerifyEmail'
 import EmailVerificationSuccess from './Pages/EmailVerificationSuccess'
+import Profile from './Pages/Profile'
 
 const App = () => {
   return (
@@ -28,6 +29,7 @@ const App = () => {
           <Route path="/educational-content" element={<EducationalContent/>} />
           <Route path="/verify-email" element={<VerifyEmail/>} />
           <Route path="/email-verification-success" element={<EmailVerificationSuccess/>}/>
+          <Route path="/profile/:id" element={<Profile/>}/>
           </Route>
           
         </Routes>

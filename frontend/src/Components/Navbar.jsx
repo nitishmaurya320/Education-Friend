@@ -7,6 +7,7 @@ import { useAuth } from '../AuthProvider';
 import { MdAccountCircle } from "react-icons/md";
 
 const Navbar = () => {
+    
     const [selectedMenu,setSelectedMenu]=useState("Home");
     const [isSidebarOpen,setIsSidebarOpen]=useState(false)
     const [isScrolled,setIsScrolled]=useState(false);
@@ -51,6 +52,7 @@ const Navbar = () => {
         }
         
     ]
+    
   return (
     <>
     <div>
@@ -109,7 +111,9 @@ const Navbar = () => {
             })
         }
     </div>
-    {user?<MdAccountCircle className='text-2xl text-white'/>:<div className='flex gap-3'>
+    {user?<Link to={`/profile/${user.user.id}`}>
+    <MdAccountCircle className='text-2xl text-white'/>    
+    </Link>:<div className='flex gap-3'>
         <Link to="/login">
         <button className="cursor-pointer bg-gradient-to-r from-green-500 to-lime-400 text-black font-semibold px-4 py-1 rounded-full shadow-md hover:scale-105 transition-all duration-300 text-[14px] md:text-[16px]">
   Login
