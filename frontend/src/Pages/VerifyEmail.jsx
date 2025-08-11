@@ -30,7 +30,7 @@ const VerifyEmail = () => {
     }
     setTimeout(async ()=>{
          try {
-        const response=await axios.post('http://localhost:8000/api/users/verify-email',{otp})
+        const response=await axios.post(`${import.meta.env.VITE_BACKEND_URL}/users/verify-email`,{otp})
         navigate("/email-verification-success")
         setSuccessMsg(response.data.message)
         console.log(response)
