@@ -1,0 +1,19 @@
+import jwt from "jsonwebtoken";
+
+const authMiddleware = (req, res, next) => {
+  const token = req.cookies.token; // read from cookies
+
+  if (!token) return res.status(401).json({ message: "No token found" });
+
+  try {
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    req.user = decoded; // store decoded payload
+    next();
+  } catch (err) {
+    return res.status(403).json({ message: "Invalid or expired token" });
+  }
+};
+
+app.get("/protected", authMiddleware, (req, res) => {
+  res.json({ message: `Welcome ${req.user.email}, this is a protected route.` });
+});
