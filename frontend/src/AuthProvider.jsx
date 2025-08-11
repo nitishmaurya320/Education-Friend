@@ -12,7 +12,7 @@ export const AuthProvider = ({ children }) => {
   // Check login status when app loads
   useEffect(() => {
     
-    axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/users/check-auth`)
+    axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/users/check-auth`,{withCredentials:true})
       .then(res => {
         if (res.data.loggedIn) {
           setUser(res.data.user);
@@ -31,7 +31,7 @@ console.log(loading)
   const login = async (email, password) => {
     try {
     await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/users/login`, { email, password });
-    const res = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/users/check-auth`);
+    const res = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/users/check-auth`,{withCredentials:true});
     if (res.data.loggedIn) setUser(res.data.user);
     return "Logged in Successful"
     // console.log(res.data.loggedIn)
