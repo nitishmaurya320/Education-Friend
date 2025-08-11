@@ -21,7 +21,7 @@ router.post("/register",async(req,res)=>{
             user=new User({name,email,password,otp})
             await user.save();
            
-            SendEmail(user.email,user.otp)
+            await SendEmail(user.email,user.otp)
             res.status(201).json({message:"User created successfully",user})
         
             
@@ -44,7 +44,7 @@ router.post("/verify-email",async(req,res)=>{
     user.isVerified=true;
     user.otp=null
     await user.save()
-    WelcomeEmail(user.email)
+    await WelcomeEmail(user.email)
     res.status(200).json({message:"Email Verified Successfuly"})
     } catch (error) {
         console.log(error)
@@ -84,8 +84,8 @@ router.post("/login",async (req,res)=>{
             if(err) throw err;
             
             res.cookie("token", token, {
-            httpOnly: true,
-            secure:false,
+            httpOnly: true, 
+            secure:true,
             sameSite: "strict",
             maxAge: 24 * 60 * 60 * 1000,
         });
