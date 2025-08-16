@@ -2,6 +2,8 @@
     const mongoose=require('mongoose')
     const dotenv=require('dotenv')
     const userRoutes=require('./routes/userRoutes')
+    const contactRoutes=require('./routes/contactRoutes')
+    const donationRoutes=require('./routes/donationRoutes')
     const cors = require('cors');
 
     const app=express()
@@ -50,6 +52,8 @@ app.use(cors({
     })
 
     app.use("/api/users",userRoutes)
+    app.use("/api",contactRoutes)
+    app.use("/api/donate",donationRoutes)
 
     app.listen(PORT,()=>{
         console.log("server is running");

@@ -3,6 +3,7 @@ import { useState } from 'react';
 import axios from 'axios'
 import { useAuth } from '../AuthProvider';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'sonner';
 
 const Login = () => {
     const navigate=useNavigate()
@@ -20,6 +21,7 @@ const Login = () => {
       setLoading(true);
       
         const result=await login(email, password);
+         toast.success("Login successful")
         
         setError(result)
       

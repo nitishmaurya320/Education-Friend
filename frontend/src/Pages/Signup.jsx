@@ -79,7 +79,7 @@ const Signup = () => {
          {error&&<p className='text-[12px] text-red-600'>{error}</p>}
 
          {
-          loading?<button
+          loading?<button display={false}
             type="submit"
             className="w-full bg-green-500 text-white font-semibold py-2 rounded-lg hover:bg-green-600 transition"
           >

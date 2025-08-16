@@ -24,9 +24,9 @@ const Navbar = () => {
     const showSidebar=()=>{
         setIsSidebarOpen(!isSidebarOpen)
     }
-    if(loading){
-    return <p>Loading...</p>
-}
+//     if(loading){
+//     return <p>Loading...</p>
+// }
     
     const menu=[
         {
@@ -49,6 +49,9 @@ const Navbar = () => {
         {
             name:"Contact",
             path:"/contact"
+        },{
+            name:"Donate",
+            path:"/donate"
         }
         
     ]

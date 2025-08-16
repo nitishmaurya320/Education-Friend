@@ -13,11 +13,16 @@ import EducationalContent from './Pages/EducationalContent'
 import VerifyEmail from './Pages/VerifyEmail'
 import EmailVerificationSuccess from './Pages/EmailVerificationSuccess'
 import Profile from './Pages/Profile'
+import { Toaster, toast } from 'sonner';
+import Donation from './Pages/Donation'
+import DonationSuccess from './Pages/DonationSuccess'
+
 
 const App = () => {
   return (
     <div className='body'>
       <BrowserRouter>
+       <Toaster position="top-right"></Toaster>
         <Routes>
           <Route path="/" element={<UserLayout/>}> 
           <Route index element={<Home/>} />
@@ -30,6 +35,8 @@ const App = () => {
           <Route path="/verify-email" element={<VerifyEmail/>} />
           <Route path="/email-verification-success" element={<EmailVerificationSuccess/>}/>
           <Route path="/profile/:id" element={<Profile/>}/>
+          <Route path="/donate" element={<Donation/>}/>
+          <Route path="/donation-success" element={<DonationSuccess/>}/>
           </Route>
           
         </Routes>

@@ -12,9 +12,12 @@ router.post("/register",async(req,res)=>{
     const {name,email,password}=req.body
     try {
         let user=await User.findOne({email})
-
         if(user){
-          return res.status(400).json({message:"User already exists"})
+          if(user.isVerified) return res.status(400).json({message:"User already exists"})
+         else{
+          await user.deleteOne();
+        }
+          
         }
             const otp = Math.floor(100000 + Math.random() * 900000).toString();
             
@@ -87,7 +90,7 @@ router.post("/login",async (req,res)=>{
             res.cookie("token", token, {
             httpOnly: true, 
             secure:true,
-            sameSite: "None",
+            sameSite: "none",
             maxAge: 24 * 60 * 60 * 1000,
         });
         res.status(200).json({message:"Logged in Successfuly"})
@@ -117,11 +120,22 @@ router.post("/logout", (req, res) => {
   res.clearCookie("token",{
       httpOnly: true,
     secure: true,       // must match login cookie options
-    sameSite: "None",   // must match login cookie options
+    sameSite: "none",   // must match login cookie options
     path: "/",  
   });
   res.json({ message: "Logged out" });
 });
 
+
+//FETCHING USER DATA
+router.get('/profile/:id',async (req,res)=>{
+  const {id}=req.params
+  try {
+    const user=await User.findById(id)
+    res.status(200).json({user})
+  } catch (error) {
+    res.status(500).json({message:error})
+  }
+})
 
 module.exports=router;

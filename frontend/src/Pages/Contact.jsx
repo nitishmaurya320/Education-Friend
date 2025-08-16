@@ -1,6 +1,36 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { createContact } from '../api/contactService';
+import { toast } from 'sonner';
 
 const Contact = () => {
+  const [formData,setFormData]=useState({
+    name:"",
+    email:"",
+    subject:"",
+    message:""
+  });
+  const onChange=(e)=>{
+    const {name,value}=e.target 
+    setFormData(prev=>({...prev,[name]:value}))
+  }
+
+  const handleSubmit=async (e)=>{
+   
+    e.preventDefault()
+    const respone=await createContact(formData)
+    console.log(respone)
+    toast.success(respone.message)
+    setFormData({
+      name:"",
+      email:"",
+      subject:"",
+      message:""
+    })
+    
+  }
+
+
+
   return (
     <div className='h-full mt-[100px] flex flex-col p-5 px-5 md:px-[100px]'>
         <div className=' justify-center items-center flex-col '>
@@ -22,12 +52,15 @@ const Contact = () => {
         </div>
       <div className='w-full md:w-1/2  p-3 md:p-10 justify-center items-center flex'>
         <div className='w-full md:w-4/5'>
-           <form className="flex flex-col gap-2 max-w-xl mx-auto bg-white p-6 rounded-lg shadow-md">
+           <form onSubmit={handleSubmit} className="flex flex-col gap-2 max-w-xl mx-auto bg-white p-6 rounded-lg shadow-md">
                 <div className="flex flex-col">
                   <label className="text-[18px] font-medium mb-2">Full Name</label>
                   <input
                     className="outline-none p-2 border border-gray-300 rounded focus:ring-1 focus:ring-green-400"
                     type="text"
+                    name="name"
+                    value={formData.name}
+                    onChange={onChange}
                     placeholder="Enter your full name"
                   />
                 </div>
@@ -37,6 +70,9 @@ const Contact = () => {
                   <input
                     className="outline-none p-2 border border-gray-300 rounded focus:ring-1 focus:ring-green-400"
                     type="email"
+                    onChange={onChange}
+                     name="email"
+                    value={formData.email}
                     placeholder="Enter your email"
                   />
                 </div>
@@ -46,6 +82,9 @@ const Contact = () => {
                   <input
                     className="outline-none p-2 border border-gray-300 rounded focus:ring-1 focus:ring-green-400"
                     type="text"
+                     name="subject"
+                    value={formData.subject}
+                    onChange={onChange}
                     placeholder="Subject"
                   />
                 </div>
@@ -55,6 +94,9 @@ const Contact = () => {
                   <textarea
                     rows="4"
                     className="p-2 border border-gray-300 rounded outline-none resize-none focus:ring-1 focus:ring-green-400"
+                    onChange={onChange}
+                     name="message"
+                    value={formData.message}
                     placeholder="Write your message here"
                   />
                 </div>
