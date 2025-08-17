@@ -78,19 +78,13 @@ const Signup = () => {
           </div>
          {error&&<p className='text-[12px] text-red-600'>{error}</p>}
 
-         {
-          loading?<button display={false}
+         <button 
             type="submit"
-            className="w-full bg-green-500 text-white font-semibold py-2 rounded-lg hover:bg-green-600 transition"
+            disabled={loading}
+            className="w-full bg-green-500 text-white font-semibold py-2 rounded-lg active:bg-green-600 hover:bg-green-600 transition"
           >
-            Signing.... 
-          </button>:<button
-            type="submit"
-            className="w-full bg-green-500 text-white font-semibold py-2 rounded-lg hover:bg-green-600 transition"
-          >
-             🌟 Sign Up
+            {loading?"Signing in...":"Sign in"}
           </button>
-         }
           
           
 

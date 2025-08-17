@@ -9,15 +9,17 @@ const Contact = () => {
     subject:"",
     message:""
   });
+  const [loading,setLoading]=useState(false)
   const onChange=(e)=>{
     const {name,value}=e.target 
     setFormData(prev=>({...prev,[name]:value}))
   }
-
+ 
   const handleSubmit=async (e)=>{
-   
+   setLoading(true)
     e.preventDefault()
     const respone=await createContact(formData)
+    setLoading(false)
     console.log(respone)
     toast.success(respone.message)
     setFormData({
@@ -103,9 +105,10 @@ const Contact = () => {
 
                 <button
                   type="submit"
-                  className="px-4 py-3 bg-green-500 text-white rounded hover:bg-green-600 transition font-semibold"
+                  disabled={loading}
+                  className={`px-4 py-3 bg-green-500 text-white rounded hover:bg-green-600 transition font-semibold`}
                 >
-                  🚀 Send Message
+                  {loading?"Sending...":"🚀 Send Message"}
                 </button>
 </form>
 
