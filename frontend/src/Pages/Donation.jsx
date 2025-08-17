@@ -22,7 +22,7 @@ export default function Donate() {
   const handleDonate = async () => {
     setLoading(true)
     const res = await loadScript("https://checkout.razorpay.com/v1/checkout.js");
-    setLoading(false)
+    
 
     if (!res) {
       alert("Razorpay SDK failed to load. Are you online?");
@@ -38,8 +38,9 @@ export default function Donate() {
       const { data: order } = await axios.post(
         `${import.meta.env.VITE_BACKEND_URL}/api/donate/create-order`,
         { amount }
+        
       );
-
+      setLoading(false)
       // Razorpay options
       const options = {
         key: import.meta.env.VITE_RAZORPAY_KEY_ID,
