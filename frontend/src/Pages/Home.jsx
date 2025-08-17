@@ -2,6 +2,7 @@ import React from 'react'
 import Services from '../Components/Services'
 import LatestJobs from '../Components/LatestJobs'
 import { Link } from 'react-router-dom'
+import FreelancingSection from '../Components/FreelancingSection'
 
 const Home = () => {
   return (
@@ -33,6 +34,7 @@ const Home = () => {
       
 
     </div>
+    <FreelancingSection/>
     <LatestJobs/>
     <Services/>
     </>
